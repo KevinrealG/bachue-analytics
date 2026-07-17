@@ -1,161 +1,165 @@
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bachué Analytics Hub | Bachue Lab SAS</title>
+    <title>Kevin Sossa | SkillsCode Pro - AI & Data Analytics</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuración de Colores basada en SkillsCode Pro -->
     <script>
-        // Configuración personalizada de colores para mantener la identidad de las imágenes
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brandDarkBlue: '#1e3d75',
-                        brandLightBlue: '#f0f7ff',
-                        brandYellow: '#fcd34d',
-                        brandYellowHover: '#f59e0b',
+                        brandDark: '#0f172a', /* Slate 900 - Modo oscuro profundo */
+                        brandCard: '#1e293b', /* Slate 800 - Tarjetas */
+                        brandMint: '#30d5a3', /* Verde menta de tu canal de YouTube */
+                        brandMintHover: '#28b489',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    
+    <!-- Aquí puedes importar PyScript en el futuro -->
+    <!-- <link rel="stylesheet" href="https://pyscript.net/releases/2023.11.1/core.css" /> -->
+    <!-- <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script> -->
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-brandDark text-gray-300 font-sans antialiased selection:bg-brandMint selection:text-brandDark">
 
-    <!-- 1. NAVBAR -->
-    <nav class="bg-brandDarkBlue text-white py-4 px-6 md:px-12 shadow-md">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-brandDark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="text-3xl"><i class="fa-solid fa-graduation-cap"></i></div>
+                <!-- Tu Logo abstracto (referencia a tu banner de YT) -->
+                <div class="w-10 h-10 rounded bg-gradient-to-br from-brandMint to-blue-500 flex items-center justify-center text-brandDark font-black text-xl">
+                    SC
+                </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-tight">Bachué Analytics Hub</h1>
-                    <p class="text-xs text-blue-200">Bachue Lab SAS - Ciencia de datos con excelencia</p>
+                    <h1 class="text-white font-bold text-lg tracking-wide">Kevin Sossa</h1>
+                    <p class="text-xs text-brandMint font-mono">SkillsCode Pro</p>
                 </div>
             </div>
-            <div class="flex gap-6 text-sm font-medium">
-                <a href="#" class="hover:text-brandYellow transition">Inicio</a>
-                <a href="#cursos" class="hover:text-brandYellow transition">Cursos</a>
-                <a href="#calculadoras" class="hover:text-brandYellow transition">Calculadoras</a>
-                <a href="#contacto" class="hover:text-brandYellow transition">Contacto</a>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#inicio" class="hover:text-brandMint transition">Inicio</a>
+                <a href="#herramientas" class="hover:text-brandMint transition">Calculadoras</a>
+                <a href="#youtube" class="hover:text-brandMint transition">Tutoriales</a>
+            </div>
+
+            <!-- Redes Sociales Inspirado en Ken Jee -->
+            <div class="flex gap-4 text-lg">
+                <a href="https://www.youtube.com/@skillscodepro" target="_blank" class="text-gray-400 hover:text-red-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/kevinandressossavalencia/" target="_blank" class="text-gray-400 hover:text-blue-500 transition"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-github"></i></a>
             </div>
         </div>
     </nav>
 
-    <!-- 2. HERO SECTION -->
-    <header class="bg-gradient-to-b from-brandLightBlue to-white py-16 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
-            <div class="max-w-xl">
-                <h2 class="text-4xl md:text-5xl font-black leading-tight text-slate-900 mb-6">
-                    Bienvenidos a <span class="bg-brandYellow px-2 py-1 rounded">Bachué Analytics</span>
-                </h2>
-                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                    Transformando datos en decisiones. Explora nuestro hub de conocimiento especializado en 
-                    <strong>Estadística Aplicada</strong>, <strong>Analítica de Datos</strong> y herramientas interactivas en la nube.
-                </p>
-                <a href="#cursos" class="inline-flex items-center gap-2 bg-brandDarkBlue hover:bg-blue-900 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
-                    ¡Empieza ahora! <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-            <!-- Foto de perfil / Logo circular -->
-            <div class="flex flex-col items-center">
-                <div class="w-64 h-64 rounded-full border-4 border-brandYellow overflow-hidden shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=500&h=500" alt="Bachue Lab SAS" class="w-full h-full object-cover">
+    <!-- HERO SECTION (Inspirado en Analyst Builder / Alex The Analyst) -->
+    <header id="inicio" class="pt-32 pb-20 px-6 lg:px-12 relative overflow-hidden">
+        <!-- Decoración de fondo tipo red neuronal -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(#30d5a3 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-block bg-brandCard border border-gray-700 rounded-full px-4 py-1.5 text-xs font-mono text-brandMint mb-6">
+                    <i class="fa-solid fa-microchip mr-2"></i> AI Researcher & Python Developer
                 </div>
-                <span class="text-xs text-gray-500 mt-3 italic"><i class="fa-solid fa-camera mr-1"></i> Bachue Lab SAS</span>
+                <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Domina la <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandMint to-blue-400">Inteligencia Artificial</span> y los Datos.
+                </h2>
+                <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                    Soy Kevin Sossa. Te ayudo a entender Machine Learning, NLP y Probabilidad desde la teoría hasta el código. Aprende con mis tutoriales y experimenta con mis herramientas interactivas impulsadas por Python en el navegador.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#herramientas" class="bg-brandMint hover:bg-brandMintHover text-brandDark font-bold px-8 py-3 rounded-lg shadow-[0_0_15px_rgba(48,213,163,0.4)] transition">
+                        Probar Calculadoras
+                    </a>
+                    <a href="#youtube" class="bg-brandCard hover:bg-gray-700 border border-gray-600 text-white font-bold px-8 py-3 rounded-lg transition flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-red-500"></i> Ver Videos
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Perfil (Inspirado en la foto de LinkedIn) -->
+            <div class="relative flex justify-center">
+                <div class="w-72 h-72 rounded-full border-4 border-brandMint/30 p-2 relative z-10">
+                    <!-- Sustituye el src con el enlace directo a tu foto -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=600&h=600" alt="Kevin Sossa" class="w-full h-full object-cover rounded-full">
+                </div>
+                <!-- Badge flotante -->
+                <div class="absolute bottom-4 right-10 bg-brandCard border border-gray-700 p-3 rounded-xl shadow-lg z-20 flex items-center gap-3">
+                    <div class="text-blue-400 text-2xl"><i class="fa-brands fa-python"></i></div>
+                    <div class="text-sm font-bold text-white">Python<br><span class="text-xs text-gray-400 font-normal">Expert</span></div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- 3. NUESTROS CURSOS -->
-    <section id="cursos" class="py-16 px-6 md:px-12">
+    <!-- SECCIÓN CALCULADORAS PYSCRIPT / WEBASSEMBLY -->
+    <section id="herramientas" class="py-20 bg-brandCard/30 px-6 border-y border-gray-800">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-black text-brandDarkBlue flex justify-center items-center gap-2">
-                    📊 Nuestros Cursos
-                </h3>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-yellow-500 mx-auto mt-3 rounded"></div>
+            <div class="text-center mb-16">
+                <h3 class="text-3xl font-bold text-white mb-4">Herramientas Científicas</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Calculadoras desarrolladas en Python corriendo directamente en tu navegador gracias a WebAssembly y PyScript. Cero instalaciones, cero latencia del servidor.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Tarjeta 1 -->
-                <div class="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300 border border-gray-100 flex flex-col items-center text-center">
-                    <div class="text-brandDarkBlue text-5xl mb-6"><i class="fa-solid fa-chart-line"></i></div>
-                    <h4 class="text-xl font-bold mb-3 text-slate-800">Estadística Inferencial</h4>
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">
-                        Pruebas paramétricas y no paramétricas, intervalos de confianza y ANOVA.
-                    </p>
-                    <span class="bg-brandYellow text-xs font-bold px-4 py-1.5 rounded-full text-slate-800">Próximamente</span>
-                </div>
-
-                <!-- Tarjeta 2 -->
-                <div class="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300 border border-gray-100 flex flex-col items-center text-center">
-                    <div class="text-brandDarkBlue text-5xl mb-6"><i class="fa-solid fa-calculator"></i></div>
-                    <h4 class="text-xl font-bold mb-3 text-slate-800">Diseño de Experimentos</h4>
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">
-                        Todos los diseños de experimentos para optimización y análisis de varianza (ANOVA).
-                    </p>
-                    <span class="bg-brandYellow text-xs font-bold px-4 py-1.5 rounded-full text-slate-800">Próximamente</span>
-                </div>
-
-                <!-- Tarjeta 3 -->
-                <div class="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300 border border-gray-100 flex flex-col items-center text-center">
-                    <div class="text-brandDarkBlue text-5xl mb-6"><i class="fa-solid fa-chart-pie"></i></div>
-                    <h4 class="text-xl font-bold mb-3 text-slate-800">Probabilidad Aplicada</h4>
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">
-                        Distribuciones, Teorema Central del Límite, simulaciones en R y Python.
-                    </p>
-                    <div class="flex gap-2">
-                        <button class="bg-brandDarkBlue hover:bg-blue-900 text-white text-xs font-bold px-4 py-2 rounded-full transition">
-                            Ir al curso →
-                        </button>
-                        <span class="bg-brandYellow text-xs font-bold px-3 py-2 rounded-full text-slate-800">Disponible</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculadora 1 -->
+                <div class="bg-brandCard rounded-2xl p-8 border border-gray-700 hover:border-brandMint/50 transition group">
+                    <div class="text-brandMint text-3xl mb-4"><i class="fa-solid fa-chart-area"></i></div>
+                    <h4 class="text-xl font-bold text-white mb-2">Calculadora de Modelos Probabilísticos</h4>
+                    <p class="text-sm text-gray-400 mb-6">Calcula distribuciones discretas y continuas (Binomial, Poisson, Normal) al instante.</p>
+                    
+                    <!-- Área de PyScript Integración -->
+                    <div class="bg-brandDark rounded-lg p-4 mb-4 border border-gray-800 font-mono text-xs">
+                        <label class="block text-gray-500 mb-1">Entrada (ej. n, p, x):</label>
+                        <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none focus:border-brandMint mb-3" placeholder="n=10, p=0.5, x=3">
+                        <div class="text-brandMint" id="resultado-1">> Esperando ejecución...</div>
                     </div>
+
+                    <!-- BOTÓN PARA INVOCAR PYSCRIPT -->
+                    <button id="btn-calc-1" class="w-full bg-gray-700 group-hover:bg-brandMint group-hover:text-brandDark text-white font-bold py-2 rounded transition">
+                        Calcular con PyScript <i class="fa-solid fa-play ml-1"></i>
+                    </button>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 4. TIP INTERACTIVO DEL DÍA -->
-    <section class="py-12 bg-white px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-2xl font-bold text-brandDarkBlue mb-2">
-                📈 Tip del día: Aprende Fácilmente Estadística
-            </h3>
-            <div class="w-16 h-1 bg-gradient-to-r from-purple-500 to-yellow-500 mx-auto mb-8 rounded"></div>
+                <!-- Calculadora 2 -->
+                <div class="bg-brandCard rounded-2xl p-8 border border-gray-700 hover:border-brandMint/50 transition group">
+                    <div class="text-brandMint text-3xl mb-4"><i class="fa-solid fa-network-wired"></i></div>
+                    <h4 class="text-xl font-bold text-white mb-2">Clasificador Naive Bayes</h4>
+                    <p class="text-sm text-gray-400 mb-6">Ingresa un vector de características y obtén la probabilidad de clase calculada en vivo.</p>
+                    
+                    <!-- Área de PyScript Integración -->
+                    <div class="bg-brandDark rounded-lg p-4 mb-4 border border-gray-800 font-mono text-xs">
+                        <label class="block text-gray-500 mb-1">Vector de datos:</label>
+                        <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none focus:border-brandMint mb-3" placeholder="[1.2, 3.4, 0.5]">
+                        <div class="text-brandMint" id="resultado-2">> Esperando ejecución...</div>
+                    </div>
 
-            <div class="bg-brandDarkBlue text-white rounded-3xl p-8 shadow-lg max-w-2xl mx-auto">
-                <p id="text-tip" class="text-lg font-medium mb-6">
-                    Haz clic en el botón para recibir un consejo de analítica de datos de Bachué Lab.
-                </p>
-                <button onclick="nuevoTip()" class="bg-brandYellow hover:bg-brandYellowHover text-slate-900 font-bold px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2 transition transform active:scale-95 shadow">
-                    <i class="fa-solid fa-lightbulb"></i> Nuevo tip
-                </button>
+                    <!-- BOTÓN PARA INVOCAR PYSCRIPT -->
+                    <button id="btn-calc-2" class="w-full bg-gray-700 group-hover:bg-brandMint group-hover:text-brandDark text-white font-bold py-2 rounded transition">
+                        Evaluar Modelo <i class="fa-solid fa-play ml-1"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-gray-400 py-8 text-center text-sm border-t border-slate-800">
-        <p>&copy; 2026 Bachue Lab SAS. Todos los derechos reservados.</p>
+    <footer class="bg-brandDark py-8 text-center border-t border-gray-800">
+        <p class="text-gray-500 text-sm">
+            &copy; 2026 Kevin Sossa - SkillsCode Pro. Desarrollado con <i class="fa-brands fa-python text-brandMint mx-1"></i> desde Cartagena, Colombia.
+        </p>
     </footer>
 
-    <!-- INTERACTIVIDAD CON JAVASCRIPT -->
-    <script>
-        const tips = [
-            "El Teorema Central del Límite asegura que, con muestras grandes, la distribución de la media será aproximadamente normal.",
-            "Para variables categóricas, prefiere gráficos de barras o de sectores para visualizar frecuencias.",
-            "Antes de aplicar ANOVA, siempre verifica el cumplimiento de los supuestos de normalidad y homocedasticidad.",
-            "El p-valor no mide la fuerza de un efecto, sino la probabilidad de observar tus datos si la hipótesis nula fuera cierta."
-        ];
-
-        function nuevoTip() {
-            const index = Math.floor(Math.random() * tips.length);
-            document.getElementById('text-tip').innerText = tips[index];
-        }
-    </script>
 </body>
+</html>
