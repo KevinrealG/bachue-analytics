@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Distribuciones de Probabilidad</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.5.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.5.1/core.js"></script>
+
+    <style>
+        body{background:#f7f9fc;font-family:'Segoe UI',sans-serif;color:#16395f}
+        .header{padding:1rem 1.5rem;background:#fff;border-bottom:1px solid #e6ebf2}
+        .header h1{margin:0;font-size:2.3rem;color:#16395f}
+        .sidebar{background:#eef2f5;padding:1.5rem;border-radius:8px;min-height:760px}
+        .panel-box{background:#fff;border:1px solid #d9e2ec;border-radius:8px;padding:1rem;margin-bottom:1rem}
+        .tabs{background:transparent;border:none}
+        .tabs-title>a{color:#0aa89e;font-weight:600;border-radius:6px 6px 0 0}
+        .tabs-title>a[aria-selected='true']{background:#fff;color:#16395f;border:1px solid #d9e2ec;border-bottom:none}
+        .tabs-content{border:1px solid #d9e2ec;background:#fff;border-radius:0 8px 8px 8px;padding:1rem}
+        .btn-calcular{background:#16395f;border-radius:6px;width:100%;font-size:1.05rem;padding:.9rem}
+        .btn-calcular:hover{background:#102d4a}
+        table{width:100%;border-collapse:collapse}
+        th{background:#f2f5f9;color:#16395f}
+        th,td{border:1px solid #d9e2ec;padding:.5rem;text-align:center}
+        .resultado{background:#fff;border:1px solid #d9e2ec;border-radius:8px;padding:.8rem;font-size:1.05rem}
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📊 Calculadora de Distribuciones de Probabilidad</h1>
+</div>
+
+<div class="grid-container fluid" style="margin-top:1rem;">
+
+    <ul class="tabs" data-tabs id="dist-tabs">
+        <li class="tabs-title is-active"><a href="#binomial" aria-selected="true">🎲 Binomial</a></li>
+        <li class="tabs-title"><a href="#binomial-neg">📊 Binomial Negativa</a></li>
+        <li class="tabs-title"><a href="#poisson">📈 Poisson</a></li>
+        <li class="tabs-title"><a href="#normal">📐 Normal</a></li>
+    </ul>
+
+    <div class="tabs-content" data-tabs-content="dist-tabs">
+
+        <div class="tabs-panel is-active" id="binomial">
+            <div class="grid-x grid-margin-x">
+
+                <div class="cell medium-4">
+                    <div class="sidebar">
+                        <h3>📊 Parámetros</h3>
+
+                        <label>Número de ensayos (n)
+                            <input type="number" id="n" value="10" min="1">
+                        </label>
+
+                        <label>Probabilidad de éxito (p)
+                            <input type="range" id="p" min="0.01" max="0.99" step="0.01" value="0.5" oninput="document.getElementById('p_val').innerText=this.value">
+                            <div style="text-align:center;color:#0aa89e;font-weight:700;" id="p_val">0.5</div>
+                        </label>
+
+                        <label>Número de éxitos (k)
+                            <input type="number" id="k" value="3" min="0">
+                        </label>
+
+                        <h4>🎯 Tipo de cálculo</h4>
+                        <label><input type="radio" name="tipo" value="exacta" checked> P(X = k)</label>
+                        <label><input type="radio" name="tipo" value="acum_menor"> P(X ≤ k)</label>
+                        <label><input type="radio" name="tipo" value="acum_mayor"> P(X ≥ k)</label>
+
+                        <br>
+                        <button class="button btn-calcular" py-click="calcular_binomial">🧮 Calcular</button>
+
+                        <br><br>
+                        <h3>📊 Resultado</h3>
+                        <div class="resultado" id="resultado-binomial">
+                            P(X = 3) = 0.117188 (11.72%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cell medium-8">
+                    <div class="panel-box">
+                        <div id="grafica-binomial"></div>
+                    </div>
+
+                    <div class="panel-box">
+                        <h4>📋 Tabla de Probabilidades</h4>
+                        <div id="tabla-binomial"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tabs-panel" id="binomial-neg">
+            <div class="grid-x grid-margin-x">
+                <div class="cell medium-4">
+                    <div class="sidebar">
+                        <h3>📊 Parámetros</h3>
+                        <label>Número de éxitos deseados (r)
+                            <input type="number" id="r_neg" value="3" min="1">
+                        </label>
+                        <label>Probabilidad de éxito (p)
+                            <input type="range" id="p_neg" min="0.01" max="0.99" step="0.01" value="0.5" oninput="document.getElementById('p_neg_val').innerText=this.value">
+                            <div style="text-align:center;color:#0aa89e;font-weight:700;" id="p_neg_val">0.5</div>
+                        </label>
+                        <label>Número de fracasos (k)
+                            <input type="number" id="k_neg" value="2" min="0">
+                        </label>
+                        <h4>🎯 Tipo de cálculo</h4>
+                        <label><input type="radio" name="tipo_neg" value="exacta" checked> P(X = k)</label>
+                        <label><input type="radio" name="tipo_neg" value="acum_menor"> P(X ≤ k)</label>
+                        <label><input type="radio" name="tipo_neg" value="acum_mayor"> P(X ≥ k)</label>
+                        <br>
+                        <button class="button btn-calcular" py-click="calcular_binomial_negativa">🧮 Calcular</button>
+                        <br><br>
+                        <h3>📊 Resultado</h3>
+                        <div class="resultado" id="resultado-negativa">
+                            P(X = 2) = 0.187500 (18.75%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cell medium-8">
+                    <div class="panel-box">
+                        <div id="grafica-negativa"></div>
+                    </div>
+
+                    <div class="panel-box">
+                        <h4>📋 Tabla de Probabilidades</h4>
+                        <div id="tabla-negativa"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-panel" id="poisson">
+            <div class="grid-x grid-margin-x">
+                <div class="cell medium-4">
+                    <div class="sidebar">
+                        <h3>📊 Parámetros</h3>
+                        <label>Lambda (λ)
+                            <input type="number" id="lambda" value="4" step="0.1" min="0.1">
+                        </label>
+                        <label>Número de eventos (k)
+                            <input type="number" id="k_poisson" value="3" min="0">
+                        </label>
+                        <h4>🎯 Tipo de cálculo</h4>
+                        <label><input type="radio" name="tipo_poisson" value="exacta" checked> P(X = k)</label>
+                        <label><input type="radio" name="tipo_poisson" value="acum_menor"> P(X ≤ k)</label>
+                        <label><input type="radio" name="tipo_poisson" value="acum_mayor"> P(X ≥ k)</label>
+                        <br>
+                        <button class="button btn-calcular" py-click="calcular_poisson">🧮 Calcular</button>
+                        <br><br>
+                        <h3>📊 Resultado</h3>
+                        <div class="resultado" id="resultado-poisson">
+                            P(X = 3) = 0.195367 (19.54%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cell medium-8">
+                    <div class="panel-box">
+                        <div id="grafica-poisson"></div>
+                    </div>
+
+                    <div class="panel-box">
+                        <h4>📋 Tabla de Probabilidades</h4>
+                        <div id="tabla-poisson"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-panel" id="normal">
+            <div class="grid-x grid-margin-x">
+                <div class="cell medium-4">
+                    <div class="sidebar">
+                        <h3>📊 Parámetros</h3>
+                        <label>Media (μ)
+                            <input type="number" id="mu" value="0" step="0.1">
+                        </label>
+                        <label>Desviación estándar (σ)
+                            <input type="number" id="sigma" value="1" step="0.1" min="0.1">
+                        </label>
+                        <label>Valor x
+                            <input type="number" id="x_normal" value="1" step="0.1">
+                        </label>
+                        <h4>🎯 Tipo de cálculo</h4>
+                        <label><input type="radio" name="tipo_normal" value="densidad" checked> f(x)</label>
+                        <label><input type="radio" name="tipo_normal" value="acum_menor"> P(X ≤ x)</label>
+                        <label><input type="radio" name="tipo_normal" value="acum_mayor"> P(X ≥ x)</label>
+                        <br>
+                        <button class="button btn-calcular" py-click="calcular_normal">🧮 Calcular</button>
+                        <br><br>
+                        <h3>📊 Resultado</h3>
+                        <div class="resultado" id="resultado-normal">
+                            f(1.0) = 0.241971
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cell medium-8">
+                    <div class="panel-box">
+                        <div id="grafica-normal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<py-config>
+packages = ["plotly", "numpy"]</py-config>
+
+<py-script>
+from pyscript import document, display
+import numpy as np
+import plotly.graph_objects as go
+import math
+
+# ---------------- BINOMIAL ----------------
+def binomial_pmf(n,p,k):
+    return math.comb(n,k)*(p**k)*((1-p)**(n-k))
+
+def calcular_binomial(event=None):
+    n = int(document.getElementById("n").value)
+    p = float(document.getElementById("p").value)
+    k = int(document.getElementById("k").value)
+    tipo = document.querySelector('input[name="tipo"]:checked').value
+
+    x = list(range(n+1))
+    y = [binomial_pmf(n,p,i) for i in x]
+
+    if tipo == "exacta":
+        prob = y[k]
+        texto = f"P(X = {k}) = {prob:.6f} ({prob*100:.2f}%)"
+    elif tipo == "acum_menor":
+        prob = sum(y[:k+1])
+        texto = f"P(X ≤ {k}) = {prob:.6f} ({prob*100:.2f}%)"
+    else:
+        prob = sum(y[k:])
+        texto = f"P(X ≥ {k}) = {prob:.6f} ({prob*100:.2f}%)"
+
+    document.getElementById("resultado-binomial").innerText = texto
+
+    colors = ["#2f8ecb"]*len(x)
+    colors[k] = "#e74c3c"
+
+    fig = go.Figure(go.Bar(x=x,y=y,marker_color=colors))
+    fig.update_layout(
+        title=f"Distribución Binomial: n = {n} , p = {p}",
+        xaxis_title="Número de éxitos (X)",
+        yaxis_title="Probabilidad",
+        template="plotly_white",
+        height=500
+    )
+    display(fig,target="grafica-binomial",append=False)
+
+    tabla = "<table><tr><th>k</th><th>P(X=k)</th><th>P(X≤k)</th></tr>"
+    acum = 0
+    for i,v in enumerate(y):
+        acum += v
+        tabla += f"<tr><td>{i}</td><td>{v:.6f}</td><td>{acum:.6f}</td></tr>"
+    tabla += "</table>"
+    document.getElementById("tabla-binomial").innerHTML = tabla
+
+# ------------- BINOMIAL NEGATIVA -------------
+def negbin_pmf(r,p,k):
+    return math.comb(k+r-1,k)*(1-p)**k*(p**r)
+
+def calcular_binomial_negativa(event=None):
+    r = int(document.getElementById("r_neg").value)
+    p = float(document.getElementById("p_neg").value)
+    k = int(document.getElementById("k_neg").value)
+    tipo = document.querySelector('input[name="tipo_neg"]:checked').value
+
+    x = list(range(21))
+    y = [negbin_pmf(r,p,i) for i in x]
+
+    if tipo == "exacta":
+        prob = y[k]
+        texto = f"P(X = {k}) = {prob:.6f} ({prob*100:.2f}%)"
+    elif tipo == "acum_menor":
+        prob = sum(y[:k+1])
+        texto = f"P(X ≤ {k}) = {prob:.6f} ({prob*100:.2f}%)"
+    else:
+        prob = sum(y[k:])
+        texto = f"P(X ≥ {k}) = {prob:.6f} ({prob*100:.2f}%)"
+
+    document.getElementById("resultado-negativa").innerText = texto
+
+    colors = ["#2f8ecb"]*len(x)
+    colors[k] = "#e74c3c"
+
+    fig = go.Figure(go.Bar(x=x,y=y,marker_color=colors))
+    fig.update_layout(
+        title=f"Binomial Negativa: r = {r} , p = {p}",
+        xaxis_title="Número de fracasos (X)",
+        yaxis_title="Probabilidad",
+        template="plotly_white",
+        height=500
+    )
+    display(fig,target="grafica-negativa",append=False)
+
+    tabla = "<table><tr><th>k</th><th>P(X=k)</th><th>P(X≤k)</th></tr>"
+    acum = 0
+    for i,v in enumerate(y):
+        acum += v
+        tabla += f"<tr><td>{i}</td><td>{v:.6f}</td><td>{acum:.6f}</td></tr>"
+    tabla += "</table>"
+    document.getElementById("tabla-negativa").innerHTML = tabla
+
+# ---------------- POISSON ----------------
+def poisson_pmf(lmbda,k):
+    return (lmbda**k)*math.exp(-lmbda)/math.factorial(k)
+
+def calcular_poisson(event=None):
+    lmbda = float(document.getElementById("lambda").value)
+    k = int(document.getElementById("k_poisson").value)
+    tipo = document.querySelector('input[name="tipo_poisson"]:checked').value
+
+    max_k = max(15, int(lmbda*3)+5)
+    x = list(range(max_k+1))
+    y = [poisson_pmf(lmbda,i) for i in x]
+
+    if tipo == "exacta":
+        prob = y[k]
+        texto = f"P(X = {k}) = {prob:.6f} ({prob*100:.2f}%)"
+    elif tipo == "acum_menor":
+        prob = sum(y[:k+1])
+        texto = f"P(X ≤ {k}) = {prob:.6f} ({prob*100:.2f}%)"
+    else:
+        prob = sum(y[k:])
+        texto = f"P(X ≥ {k}) = {prob:.6f} ({prob*100:.2f}%)"
+
+    document.getElementById("resultado-poisson").innerText = texto
+
+    colors = ["#2f8ecb"]*len(x)
+    if k < len(colors):
+        colors[k] = "#e74c3c"
+
+    fig = go.Figure(go.Bar(x=x,y=y,marker_color=colors))
+    fig.update_layout(
+        title=f"Distribución Poisson: λ = {lmbda}",
+        xaxis_title="Número de eventos (X)",
+        yaxis_title="Probabilidad",
+        template="plotly_white",
+        height=500
+    )
+    display(fig,target="grafica-poisson",append=False)
+
+    tabla = "<table><tr><th>k</th><th>P(X=k)</th><th>P(X≤k)</th></tr>"
+    acum = 0
+    for i,v in enumerate(y):
+        acum += v
+        tabla += f"<tr><td>{i}</td><td>{v:.6f}</td><td>{acum:.6f}</td></tr>"
+    tabla += "</table>"
+    document.getElementById("tabla-poisson").innerHTML = tabla
+
+# ---------------- NORMAL ----------------
+def normal_pdf(x,mu,sigma):
+    return (1/(sigma*math.sqrt(2*math.pi)))*math.exp(-0.5*((x-mu)/sigma)**2)
+
+def normal_cdf(x,mu,sigma):
+    z = (x-mu)/(sigma*math.sqrt(2))
+    return 0.5*(1+math.erf(z))
+
+def calcular_normal(event=None):
+    mu = float(document.getElementById("mu").value)
+    sigma = float(document.getElementById("sigma").value)
+    x0 = float(document.getElementById("x_normal").value)
+    tipo = document.querySelector('input[name="tipo_normal"]:checked').value
+
+    if tipo == "densidad":
+        val = normal_pdf(x0,mu,sigma)
+        texto = f"f({x0}) = {val:.6f}"
+    elif tipo == "acum_menor":
+        val = normal_cdf(x0,mu,sigma)
+        texto = f"P(X ≤ {x0}) = {val:.6f} ({val*100:.2f}%)"
+    else:
+        val = 1-normal_cdf(x0,mu,sigma)
+        texto = f"P(X ≥ {x0}) = {val:.6f} ({val*100:.2f}%)"
+
+    document.getElementById("resultado-normal").innerText = texto
+
+    xs = np.linspace(mu-4*sigma, mu+4*sigma, 400)
+    ys = [normal_pdf(x,mu,sigma) for x in xs]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=xs,y=ys,mode='lines',line=dict(color="#2f8ecb",width=3),name='f(x)'))
+    fig.add_vline(x=x0, line_color="#e74c3c", line_width=3)
+    fig.update_layout(
+        title=f"Distribución Normal: μ = {mu}, σ = {sigma}",
+        xaxis_title="x",
+        yaxis_title="Densidad",
+        template="plotly_white",
+        height=500
+    )
+    display(fig,target="grafica-normal",append=False)
+
+# Inicialización
+calcular_binomial()
+calcular_binomial_negativa()
+calcular_poisson()
+calcular_normal()
+</py-script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js"></script>
+<script>$(document).foundation();</script>
+
+</body>
+</html>
