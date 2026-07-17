@@ -6,11 +6,19 @@ Este es el portal oficial de **Bachue Lab SAS** enfocado en la divulgación, cur
 
 ```text
 bachue-analytics/
-├── index.html          # Página de inicio (Home interactivo con Tailwind)
-├── assets/             # Recursos estáticos
+├── index.html              # Landing Page principal
+├── hub.html                # Centro de mando (Hub de calculadoras)
+├── assets/                 # Recursos compartidos
 │   ├── css/
-│   │   └── style.css   # Estilos personalizados (si se requieren)
+│   │   └── main.css        # Estilos generales para toda la marca
 │   ├── js/
-│   │   └── main.js     # Interactividad (consejos dinámicos, filtros)
-│   └── img/            # Logos, fotos de perfil e ilustraciones
+│   │   └── main.js         # Lógica de interactividad general
+│   └── img/                # Logos y fotos de perfil
+└── calculadoras/           # Carpeta dedicada a las herramientas
+    ├── descriptiva.html
+    ├── probabilidad.html
+    ├── intervalos.html
+    ├── hipotesis.html
+    ├── experimentos.html
+    └── lineal.html
 └── README.md           # Documentación del proyecto
