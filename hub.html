@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ajuste para que el iframe sea fluido */
+        .calc-frame { height: 750px; width: 100%; border: none; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <div class="flex h-screen">
+        <!-- MENÚ LATERAL -->
+        <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700">
+            <h2 class="text-brandMint font-bold text-lg mb-6 uppercase tracking-widest">Toolbox</h2>
+            <nav class="space-y-2">
+                <a href="descriptiva.html" target="calc-area" class="block p-3 rounded hover:bg-gray-700 transition">📊 Descriptiva</a>
+                <a href="probabilidad.html" target="calc-area" class="block p-3 rounded hover:bg-gray-700 transition">🎲 Distribuciones</a>
+                <a href="intervalos.html" target="calc-area" class="block p-3 rounded hover:bg-gray-700 transition">🎯 Intervalos</a>
+                <a href="hipotesis.html" target="calc-area" class="block p-3 rounded hover:bg-gray-700 transition">📌 Hipótesis</a>
+                <a href="experimentos.html" target="calc-area" class="block p-3 rounded hover:bg-gray-700 transition">🧪 ANOVA</a>
+                <a href="lineal.html" target="calc-area" class="block p-3 rounded hover:bg-gray-700 transition">➕ Álgebra Lineal</a>
+            </nav>
+        </aside>
+
+        <!-- ÁREA DE VISUALIZACIÓN -->
+        <main class="flex-1 p-6 bg-gray-900">
+            <iframe name="calc-area" src="descriptiva.html" class="calc-frame rounded-xl shadow-2xl bg-white"></iframe>
+        </main>
+    </div>
+</body>
+</html>
