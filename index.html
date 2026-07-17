@@ -105,54 +105,20 @@
     </header>
 
     <!-- SECCIÓN CALCULADORAS PYSCRIPT / WEBASSEMBLY -->
+   <!-- SECCIÓN CALCULADORAS PYSCRIPT / WEBASSEMBLY -->
     <section id="herramientas" class="py-20 bg-brandCard/30 px-6 border-y border-gray-800">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10">
                 <h3 class="text-3xl font-bold text-white mb-4">Herramientas Científicas</h3>
-                <p class="text-gray-400 max-w-2xl mx-auto">Calculadoras desarrolladas en Python corriendo directamente en tu navegador gracias a WebAssembly y PyScript. Cero instalaciones, cero latencia del servidor.</p>
+                <p class="text-gray-400 max-w-2xl mx-auto">Calculadoras desarrolladas en Python corriendo directamente en tu navegador gracias a PyScript.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Calculadora 1 -->
-                <div class="bg-brandCard rounded-2xl p-8 border border-gray-700 hover:border-brandMint/50 transition group">
-                    <div class="text-brandMint text-3xl mb-4"><i class="fa-solid fa-chart-area"></i></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Calculadora de Modelos Probabilísticos</h4>
-                    <p class="text-sm text-gray-400 mb-6">Calcula distribuciones discretas y continuas (Binomial, Poisson, Normal) al instante.</p>
-                    
-                    <!-- Área de PyScript Integración -->
-                    <div class="bg-brandDark rounded-lg p-4 mb-4 border border-gray-800 font-mono text-xs">
-                        <label class="block text-gray-500 mb-1">Entrada (ej. n, p, x):</label>
-                        <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none focus:border-brandMint mb-3" placeholder="n=10, p=0.5, x=3">
-                        <div class="text-brandMint" id="resultado-1">> Esperando ejecución...</div>
-                    </div>
-
-                    <!-- BOTÓN PARA INVOCAR PYSCRIPT -->
-                    <button id="btn-calc-1" class="w-full bg-gray-700 group-hover:bg-brandMint group-hover:text-brandDark text-white font-bold py-2 rounded transition">
-                        Calcular con PyScript <i class="fa-solid fa-play ml-1"></i>
-                    </button>
-                </div>
-
-                <!-- Calculadora 2 -->
-                <div class="bg-brandCard rounded-2xl p-8 border border-gray-700 hover:border-brandMint/50 transition group">
-                    <div class="text-brandMint text-3xl mb-4"><i class="fa-solid fa-network-wired"></i></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Clasificador Naive Bayes</h4>
-                    <p class="text-sm text-gray-400 mb-6">Ingresa un vector de características y obtén la probabilidad de clase calculada en vivo.</p>
-                    
-                    <!-- Área de PyScript Integración -->
-                    <div class="bg-brandDark rounded-lg p-4 mb-4 border border-gray-800 font-mono text-xs">
-                        <label class="block text-gray-500 mb-1">Vector de datos:</label>
-                        <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none focus:border-brandMint mb-3" placeholder="[1.2, 3.4, 0.5]">
-                        <div class="text-brandMint" id="resultado-2">> Esperando ejecución...</div>
-                    </div>
-
-                    <!-- BOTÓN PARA INVOCAR PYSCRIPT -->
-                    <button id="btn-calc-2" class="w-full bg-gray-700 group-hover:bg-brandMint group-hover:text-brandDark text-white font-bold py-2 rounded transition">
-                        Evaluar Modelo <i class="fa-solid fa-play ml-1"></i>
-                    </button>
-                </div>
+            <!-- Contenedor del iframe -->
+            <div class="w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-gray-700 h-[850px]">
+                <iframe src="./calculadoras.html" class="w-full h-full border-0" title="Calculadoras Estadísticas"></iframe>
             </div>
         </div>
-    </section>
+    </section> 
 
     <!-- FOOTER -->
     <footer class="bg-brandDark py-8 text-center border-t border-gray-800">
